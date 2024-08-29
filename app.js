@@ -93,11 +93,17 @@ console.log("error in mongo session store",err);
     //     console.log(registerduser);
     //     res.send(registerduser)
     // })
-    
-    
+    // app.use("/listings", (req, res, next) => {
+    //     console.log("Listings route hit");
+    //     next();
+    //   });
+    app.use("/",listingroutes);
     app.use("/listings",listingroutes);
     app.use("/listings/:id/reviews",reviewroutes)
     app.use("/",signupuser);
+
+    
+      
     
     // error handling through  epress error
     app.all("*",(req,res,next)=>{
