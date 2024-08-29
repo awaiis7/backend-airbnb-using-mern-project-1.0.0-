@@ -97,7 +97,7 @@ console.log("error in mongo session store",err);
     //     console.log("Listings route hit");
     //     next();
     //   });
-    app.use("/",listingroutes);
+    // app.use("/",listingroutes);
     app.use("/listings",listingroutes);
     app.use("/listings/:id/reviews",reviewroutes)
     app.use("/",signupuser);
@@ -106,8 +106,9 @@ console.log("error in mongo session store",err);
       
     
     // error handling through  epress error
-    app.all("*",(req,res,next)=>{
-        next(new Expresserror(404,"page not found"))
+    app.all("*", (req, res, next) => {
+        req.flash("error", "Page not found");
+        res.redirect("/listings"); // Redirect to the main listings page
     });
     app.use((err,req,res,next)=>{
         let {statuscode=500,message="something went wrong"}=err;
